@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Box } from "@material-ui/core";
+import AppContext from "../contex/AppContext";
 
 const useStyles = makeStyles({
   root: {
@@ -13,12 +14,18 @@ const useStyles = makeStyles({
 });
 
 const Actions = ({ props }) => {
+  const { state, changeStats } = useContext(AppContext);
+
   const classes = useStyles();
   const actions = props;
+
+  const handleAction = () => {
+    changeStats(actions.stats);
+  };
   return (
     <Box mx={3}>
       <Card className={classes.root}>
-        <CardActionArea>
+        <CardActionArea onClick={handleAction}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {actions.name}

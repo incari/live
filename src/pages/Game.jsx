@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Stats from "../components/Stats";
 import ElementContainer from "../components/ElementContainer";
 import Actions from "../components/Actions";
@@ -6,11 +6,15 @@ import { Grid } from "@material-ui/core";
 import Items from "../components/Items";
 
 import { Actions as act } from "../api/Actions";
-import { Backpack } from "../api/Backpack";
 import { CampUpgrades } from "../api/CampUpgrades";
 import { Food } from "../api/Food";
 import { Other } from "../api/Other";
+import AppContext from "../contex/AppContext";
+
 const Game = () => {
+  const { state } = useContext(AppContext);
+  const backpack = state.backpack;
+
   return (
     <>
       <Stats />
@@ -23,9 +27,11 @@ const Game = () => {
             ))}
           </Grid>
         </ElementContainer>
+
+        {/* Backpack start */}
         <Grid item md={3} xs={12}>
           <ElementContainer title={"Backpack 4/10"}>
-            {Backpack.map((backpack) => (
+            {backpack.map((backpack) => (
               <Items
                 type={"backpack"}
                 props={backpack}
@@ -34,6 +40,7 @@ const Game = () => {
             ))}
           </ElementContainer>
         </Grid>
+        {/* Backpack end */}
 
         <Grid item md={3} xs={12}>
           <ElementContainer title={"Camp Upgrades"}>

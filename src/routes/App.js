@@ -9,7 +9,7 @@ import NotFound from "../pages/NotFound";
 
 import "./App.css";
 import AppContex from "../contex/AppContext";
-import initialState from "../initialState";
+import useInitialState from "../hooks/useInitialState";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 
 function App() {
   const classes = useStyles();
-
+  const initialState = useInitialState();
   return (
     <AppContex.Provider value={initialState}>
       <Router className={classes.root}>

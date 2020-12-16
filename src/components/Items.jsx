@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Box, Grid } from "@material-ui/core";
+import AppContext from "../contex/AppContext";
 
 const useStyles = makeStyles({
   root: {
@@ -14,8 +14,22 @@ const useStyles = makeStyles({
   },
 });
 const Items = ({ type, props }) => {
+  const { changeStats, useItem } = useContext(AppContext);
+
   const classes = useStyles();
   const items = props;
+  console.log(changeStats);
+  const handleClick = (action) => {
+    switch (action) {
+      case "consume":
+        changeStats(items.stats);
+        break;
+      case "discard":
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Box my={3}>
@@ -52,7 +66,12 @@ const Items = ({ type, props }) => {
               alignItems="center"
             >
               {items.actions.map((actions) => (
-                <Button size="large" color="primary" key={actions}>
+                <Button
+                  size="large"
+                  color="primary"
+                  key={actions}
+                  onClick={() => handleClick(actions)}
+                >
                   {actions}
                 </Button>
               ))}

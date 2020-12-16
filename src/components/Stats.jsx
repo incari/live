@@ -11,32 +11,36 @@ import Grid from "@material-ui/core/Grid";
 import AppContex from "../contex/AppContext";
 
 const Stats = () => {
-  const stats = useContext(AppContex).stats;
-
+  const { state } = useContext(AppContex);
+  const { stats } = state;
   return (
     <>
-      <Grid container direction="row" justify="flex-start" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+      >
         <div>
           <FavoriteIcon />
           <span>{stats.hp}</span>
         </div>
-
-        <div>
-          <LocalDrinkSharpIcon />
-          <span>{stats.water}</span>
-        </div>
-
-        <div>
-          <FastfoodIcon />
-          <span>{stats.food}</span>
-        </div>
-
         <div>
           <BatteryCharging90Icon />
           <span>{stats.energy}</span>
         </div>
-        <EventIcon />
-        <span>{stats.days}</span>
+        <div>
+          <LocalDrinkSharpIcon />
+          <span>{stats.water}</span>
+        </div>
+        <div>
+          <FastfoodIcon />
+          <span>{stats.food}</span>
+        </div>
+        <div>
+          <EventIcon />
+          <span>{stats.days}</span>
+        </div>
       </Grid>
     </>
   );
