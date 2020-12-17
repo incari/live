@@ -2,21 +2,21 @@ export const Food = [
   {
     name: "Cooked meat",
     needed: ["Raw meat"],
-    actions: ["Craft"],
+    actions: ["craft"],
   },
   {
     name: "Clean water",
     needed: ["Dirty water"],
-    actions: ["Craft"],
+    actions: ["craft"],
   },
   {
     name: "Medicinal tea",
     needed: ["Clean water", "Medicinal herbs"],
-    actions: ["Craft"],
+    actions: ["craft"],
   },
   {
     name: "Jerky",
     needed: ["Raw meat", "Salt"],
-    actions: ["Craft"],
+    actions: ["craft"],
   },
 ];

@@ -14,17 +14,21 @@ const useStyles = makeStyles({
   },
 });
 const Items = ({ type, props }) => {
-  const { changeStats, useItem } = useContext(AppContext);
+  const { state, ConsumeItem, DiscardItem, CraftItem } = useContext(AppContext);
 
   const classes = useStyles();
-  const items = props;
-  console.log(changeStats);
+  const item = props;
+
   const handleClick = (action) => {
     switch (action) {
       case "consume":
-        changeStats(items.stats);
+        ConsumeItem(item);
         break;
       case "discard":
+        DiscardItem(item, state);
+        break;
+      case "craft":
+        CraftItem(item, state);
         break;
       default:
         break;
@@ -36,36 +40,31 @@ const Items = ({ type, props }) => {
       <Card className={classes.root}>
         <CardContent>
           <Typography gutterBottom variant="h6" component="h3">
-            {type === "backpack" ? `${items.name} x ${items.qty}` : items.name}
+            {type === "backpack" ? `${item.name} x ${item.qty}` : item.name}
           </Typography>
-          {items.description ? (
+          {item.description ? (
             <Typography variant="body2" color="textSecondary" component="p">
-              {items.description}
+              {item.description}
             </Typography>
           ) : null}
         </CardContent>
         <CardActions>
-          {items.actions > 1 ? (
+          {item.actions > 1 ? (
             <Grid
               container
               direction="row"
               justify="space-around"
               alignItems="center"
             >
-              {items.actions.map((actions) => (
+              {item.actions.map((actions) => (
                 <Button size="large" color="primary" key={actions}>
                   {actions}
                 </Button>
               ))}
             </Grid>
           ) : (
-            <Grid
-              container
-              direction="row"
-              justify="flex-end"
-              alignItems="center"
-            >
-              {items.actions.map((actions) => (
+            <Grid container direction="row" justify="flex-end" align="center">
+              {item.actions.map((actions) => (
                 <Button
                   size="large"
                   color="primary"

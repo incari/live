@@ -18,7 +18,7 @@ export const Actions = [
     },
   },
   {
-    name: "Scavenge",
+    name: "Gatherer",
     description: "Find useful items to survive",
     statsDescription: "-5 energy, -5 water, -3 food",
     stats: {

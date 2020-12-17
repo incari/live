@@ -15,6 +15,11 @@ const Game = () => {
   const { state } = useContext(AppContext);
   const backpack = state.backpack;
 
+  let count = 0;
+  backpack.forEach((item) => {
+    count = count + item.qty;
+  });
+
   return (
     <>
       <Stats />
@@ -30,7 +35,7 @@ const Game = () => {
 
         {/* Backpack start */}
         <Grid item md={3} xs={12}>
-          <ElementContainer title={"Backpack 4/10"}>
+          <ElementContainer title={`Backpack ${count} /10`}>
             {backpack.map((backpack) => (
               <Items
                 type={"backpack"}
