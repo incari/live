@@ -2,9 +2,12 @@ export const Actions = [
   {
     name: "Sleep",
     description: "Rest to replenish your energy",
-    statsDescription: "+35 energy",
+    statsDescription: "+35 energy, -8 water, -10 food",
     stats: {
       energy: 35,
+      water: -8,
+      food: -10,
+      time: 8,
     },
   },
   {
@@ -15,6 +18,7 @@ export const Actions = [
       energy: -10,
       water: -10,
       food: -6,
+      time: 6,
     },
   },
   {
@@ -25,6 +29,7 @@ export const Actions = [
       energy: -5,
       water: -5,
       food: -3,
+      time: 4,
     },
   },
 ];

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 const Actions = ({ props }) => {
-  const { state, UseAction } = useContext(AppContext);
+  const { UseAction } = useContext(AppContext);
   const classes = useStyles();
   const actions = props;
 

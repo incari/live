@@ -31,14 +31,26 @@ const useInitialState = () => {
             : state.stats[key] + usedAction[key];
       }
     }
+    if (state.stats.time + usedAction.time >= 23) {
+      act.days = state.stats.days + 1;
+      act.time = act.time - 24;
+    }
+    console.log(act);
+
     switch (payload.name) {
       case "Gatherer":
+        const backpack = [...state.backpack];
         const random = Math.floor(
           Math.random() * Object.keys(gatheredItems).length
         );
-        const itemFound = gatheredItems[random];
-        const backpack = [...state.backpack];
+        const maxCapacity = 100; // to be upgraded in next iteration
+        let count = 0;
+        backpack.forEach((item) => {
+          count = count + item.qty;
+        });
+        if (count >= maxCapacity) return;
 
+        const itemFound = gatheredItems[random];
         if (!backpack.find((item) => item.name === itemFound.name)) {
           itemFound.qty = 1;
           backpack.push(itemFound);
@@ -65,7 +77,6 @@ const useInitialState = () => {
   const ConsumeItem = (payload) => {
     const consumedItem = {};
     const itemStats = payload.stats || {};
-    console.log(payload);
     // Change stats
     for (const key in itemStats) {
       if (state.stats.hasOwnProperty(key)) {
@@ -77,20 +88,19 @@ const useInitialState = () => {
     }
     // Remove from backpack
     if (!payload.qty) return;
-    if (!state.backpack.find((item) => item.name === payload.name)) return;
-    if (
-      state.backpack.find((item) => item.name === payload.name).qty -
-        payload.qty <=
-      0
-    ) {
+    const itemExist = state.backpack.find((item) => item.name === payload.name);
+    if (!itemExist) return;
+
+    if (itemExist.qty - payload.qty <= 0) {
       setState({
         ...state,
         stats: { ...state.stats, ...consumedItem },
-        backpack: state.backpack.filter((items) => items.name !== payload.name),
+        backpack: state.backpack.filter((item) => item.name !== payload.name),
       });
     } else {
       let a = state.backpack.find((item) => item.name === payload.name);
-      state.backpack.find((item) => item.name === payload.name).qty = a.qty - 1;
+      state.backpack.find((item) => item.name === payload.name).qty =
+        a.qty - payload.qty;
       setState({
         ...state,
         stats: { ...state.stats, ...consumedItem },
@@ -103,25 +113,12 @@ const useInitialState = () => {
       ConsumeItem(item);
     });
   };
-
-  const Gatherer = () => {
-    const newBackpack = state.backpack;
-    const random = gatheredItems.lenght;
-
-    console.log(newBackpack, random);
-    setState({
-      ...state,
-      backpack: { ...newBackpack },
-    });
-  };
-
   return {
     state,
     UseAction,
     DiscardItem,
     ConsumeItem,
     CraftItem,
-    Gatherer,
   };
 };
 

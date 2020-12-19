@@ -14,22 +14,24 @@ const useStyles = makeStyles({
   },
 });
 const Items = ({ type, props }) => {
-  const { state, ConsumeItem, DiscardItem, CraftItem } = useContext(AppContext);
+  const { ConsumeItem, DiscardItem, CraftItem } = useContext(AppContext);
 
   const classes = useStyles();
   const item = props;
-
+  const consumed = { ...item };
+  consumed.qty = 1;
   const handleClick = (action) => {
     switch (action) {
       case "consume":
-        ConsumeItem(item);
+        ConsumeItem(consumed);
         break;
       case "discard":
-        DiscardItem(item, state);
+        DiscardItem(item);
         break;
       case "craft":
-        CraftItem(item, state);
+        CraftItem(item);
         break;
+
       default:
         break;
     }

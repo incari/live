@@ -4,8 +4,7 @@ import LocalDrinkSharpIcon from "@material-ui/icons/LocalDrinkSharp";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import BatteryCharging90Icon from "@material-ui/icons/BatteryCharging90";
 import EventIcon from "@material-ui/icons/Event";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import IconButton from "@material-ui/core/IconButton";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import Grid from "@material-ui/core/Grid";
 
 import AppContex from "../contex/AppContext";
@@ -40,6 +39,13 @@ const Stats = () => {
         <div>
           <EventIcon />
           <span>{stats.days}</span>
+        </div>
+        <div>
+          <AccessTimeIcon />
+          <span>
+            {stats.time >= 10 ? "" : "0"}
+            {stats.time}:00
+          </span>
         </div>
       </Grid>
     </>

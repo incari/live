@@ -20,6 +20,14 @@ const Game = () => {
     count = count + item.qty;
   });
 
+  if (
+    state.stats.hp <= 0 ||
+    state.stats.water <= 0 ||
+    state.stats.food <= 0 ||
+    state.stats.energy <= 0
+  ) {
+    window.location.href = "/gameover";
+  }
   return (
     <>
       <Stats />
